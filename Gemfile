@@ -14,7 +14,7 @@ ruby '2.5.8'
 ## your dependencies, then nothing extra needs to be done
 group :development do
   gem 'ffi-icu'
-  gem 'jekyll', '~>4.0'
+  gem 'jekyll', '~> 4.1', '>= 4.1.0'
   gem 'json', '>= 1.9'
   gem 'less', '2.4.0'
   gem 'kramdown', '~> 2.5', '>= 2.5.1'
