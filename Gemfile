@@ -17,8 +17,8 @@ group :development do
   gem 'jekyll', '~> 4.1', '>= 4.1.0'
   gem 'json', '>= 1.9'
   gem 'less', '2.4.0'
-  gem 'kramdown', '~> 2.5', '>= 2.5.1'
-  gem 'RedCloth', ">= 4.3.0"
+  gem 'kramdown', '~> 2.3', '>= 2.3.2'
+  gem 'RedCloth', '>= 4.3.3'
   gem 'therubyracer' # required by less
   gem 'jshintrb', '~>0.3.0'
   gem 'safe_yaml'
@@ -29,5 +29,5 @@ end
 ## you can put whatever you want here and bundler will tell us humans to
 ## install the new Gems.
 group :slow_test do
-  gem 'html-proofer', '3.15.0'
+  gem 'html-proofer', '2.2.0'
 end
