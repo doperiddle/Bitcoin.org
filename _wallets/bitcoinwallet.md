@@ -5,7 +5,7 @@
 id: bitcoinwallet
 title: "Bitcoin Wallet"
 titleshort: "Bitcoin Wallet"
-compat: "mobile android"
+compat: [mobile, android]
 user: beginner
 level: 2
 platform:
@@ -17,7 +17,7 @@ platform:
         link: "https://play.google.com/store/apps/details?id=de.schildbach.wallet"
         source: "https://github.com/bitcoin-wallet/bitcoin-wallet"
         screenshot: "bitcoinwalletandroid.png"
-        features: "bech32 legacy_addresses segwit"
+        features: [bech32, legacy_addresses, segwit]
         check:
           control: "checkgoodcontrolfull"
           validation: "checkpassvalidationspvp2p"

@@ -5,7 +5,7 @@
 id: keepkey
 title: "KeepKey"
 titleshort: "KeepKey"
-compat: "hardware"
+compat: [hardware]
 level: 2
 platform:
   - hardware:
@@ -16,7 +16,7 @@ platform:
         link: "https://www.keepkey.com/"
         source: "https://github.com/keepkey/keepkey-firmware"
         screenshot: "keepkey.png"
-        features: "bech32 hardware_wallet legacy_addresses multisig segwit"
+        features: [bech32, hardware_wallet, legacy_addresses, multisig, segwit]
         check:
           control: "checkgoodcontrolfull"
           validation: "checkneutralvalidationvariable"

@@ -5,7 +5,7 @@
 id: wasabi
 title: "Wasabi Wallet"
 titleshort: "Wasabi"
-compat: "desktop windows mac linux"
+compat: [desktop, windows, mac, linux]
 level: 3
 platform:
   - desktop:
@@ -15,7 +15,7 @@ platform:
       link: "https://wasabiwallet.io/"
       source: "https://github.com/zkSNACKs/WalletWasabi/"
       screenshot: "wasabi.png"
-      features: "bech32 hardware_wallet segwit"
+      features: [bech32, hardware_wallet, segwit]
       check:
         control: "checkgoodcontrolfull"
         validation: "checkfailvalidationcentralized"

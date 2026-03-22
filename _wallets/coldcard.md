@@ -5,7 +5,7 @@
 id: coldcard
 title: "Coldcard"
 titleshort: "Coldcard"
-compat: "hardware"
+compat: [hardware]
 level: 2
 platform:
   - hardware:
@@ -16,7 +16,7 @@ platform:
         link: "https://coldcardwallet.com/"
         source: "https://github.com/Coldcard/firmware"
         screenshot: "coldcard.png"
-        features: "bech32 hardware_wallet legacy_addresses multisig segwit"
+        features: [bech32, hardware_wallet, legacy_addresses, multisig, segwit]
         check:
           control: "checkgoodcontrolfull"
           validation: "checkneutralvalidationvariable"

@@ -5,7 +5,7 @@
 id: trezormodelt
 title: "Trezor Model T"
 titleshort: "Trezor Model T"
-compat: "hardware"
+compat: [hardware]
 level: 2
 platform:
   - hardware:
@@ -16,7 +16,7 @@ platform:
         link: "https://trezor.io/"
         source: "https://github.com/trezor/trezor-firmware"
         screenshot: "trezormodelt.png"
-        features: "bech32 hardware_wallet legacy_addresses multisig segwit"
+        features: [bech32, hardware_wallet, legacy_addresses, multisig, segwit]
         check:
           control: "checkgoodcontrolfull"
           validation: "checkneutralvalidationvariable"

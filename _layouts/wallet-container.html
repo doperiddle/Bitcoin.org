@@ -21,7 +21,7 @@ max_wallet_text_length: 418 ## Unicode characters
           <p class="features-title">{% translate wallet-selector-features choose-your-wallet %}:</p>
           <div class="line"></div>
         </div>
-        {% assign features = page.os.features | split: " " %}
+        {% assign features = page.os.features %}
         <div class="features-elements">
           {% for featureName in features %}
             <div class="features-element">
@@ -202,7 +202,7 @@ max_wallet_text_length: 418 ## Unicode characters
                 <a
                   href="{% if platform.name == os.name %}/{{page.lang}}/wallets/{{platform.name}}/{{id}}/{% else %}/{{page.lang}}/wallets/{{platform.name}}/{{os.name}}/{{id}}/{% endif %}"
                   class="wallet-table-row wallet-link"
-                  data-categories="{% if wallet.user %}{{wallet.user}}{% endif %} experienced {% for check in os.check %}{% assign checkValue = check[1] %}{% assign checkName = check[0] %}{% if checkValue contains 'checkgood' %}{{checkName}} {% endif %}{% endfor %}{{os.name}} {{os.features}}"
+                  data-categories="{% if wallet.user %}{{wallet.user}}{% endif %} experienced {% for check in os.check %}{% assign checkValue = check[1] %}{% assign checkName = check[0] %}{% if checkValue contains 'checkgood' %}{{checkName}} {% endif %}{% endfor %}{{os.name}} {{os.features | join: ' '}}"
                   data-id="{{id}}"
                 >
                   <div class="wallet-table-data">

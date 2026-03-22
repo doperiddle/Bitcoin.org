@@ -5,7 +5,7 @@
 id: sparrow
 title: "Sparrow Wallet"
 titleshort: "Sparrow"
-compat: "desktop windows mac linux"
+compat: [desktop, windows, mac, linux]
 level: 2
 platform:
   - desktop:
@@ -15,7 +15,7 @@ platform:
       link: "https://sparrowwallet.com/"
       source: "https://github.com/sparrowwallet/sparrow/"
       screenshot: "sparrow.png"
-      features: "bech32 hardware_wallet legacy_addresses multisig segwit"
+      features: [bech32, hardware_wallet, legacy_addresses, multisig, segwit]
       check:
         control: "checkgoodcontrolfull"
         validation: "checkpassvalidationservers"

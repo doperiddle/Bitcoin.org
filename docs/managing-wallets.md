@@ -173,7 +173,7 @@ below:
 Assignment of the features are done below the `screenshot` field and assigning
 multiple features can be done like so, for example:
 
-`features: "bech32 legacy_addresses mixing_shuffling segwit"`
+`features: [bech32, legacy_addresses, mixing_shuffling, segwit]`
 
 **Icon**: The png file must go in `/img/wallet`, be 144 X 144 px and optimized
 with `optipng -o7 file.png`. The icon must fit within 96 X 96 px inside the png,
@@ -196,63 +196,97 @@ between 1 and 4. Level represents a category of a wallet:
 
 ### Score
 
-Each wallet is assigned a score for five criteria. For each of them, the
-appropriate text in `_translations/en.yml` needs to be chosen (_see `choose-your-wallet` section_).
+Each wallet is assigned a score for six criteria. For each of them, set the
+`check` field under the appropriate OS entry in the wallet file using one of
+the values listed below.
 
-**Control** - What control the user has over his bitcoins?
+**Control** - What control the user has over their bitcoins?
 
-To get a good score, the wallet must provide the user with full exclusive
-control over their bitcoins.
+Use one of the following values for the `control` field:
 
-To get a passing score, the wallet must provide the user with exclusive control
-over their bitcoins. Encrypted online backups are accepted so long as only the
-user can decrypt them. Multisig wallets are accepted so long as only the user
-can spend without the other party's permission.
+| Value | Meaning |
+|-------|---------|
+| `checkgoodcontrolfull` | User has full exclusive control over private keys |
+| `checkpasscontrolhybrid` | User has exclusive control, with encrypted online backup |
+| `checkpasscontrolmulti` | Multisig wallet: user can spend without the other party |
+| `checkfailcontrolthirdpartyinsured` | Third party holds keys but provides insurance |
+| `checkfailcontrolthirdparty` | Third party holds keys |
 
 **Validation** - How secure and « zero trust » is payment processing?
 
-To get a good score, the wallet must be a full node and need no trust on other
-nodes.
+Use one of the following values for the `validation` field:
 
-To get a passing score, the wallet must rely on random nodes, either by using
-the SPV model or a pre-populated list or servers.
+| Value | Meaning |
+|-------|---------|
+| `checkgoodvalidationfullnode` | Full node: validates all transactions independently |
+| `checkgoodvalidationfullnoderequired` | Full node required for use |
+| `checkneutralvalidationvariable` | Validation depends on how it's connected |
+| `checkpassvalidationspvp2p` | SPV using random peers |
+| `checkpassvalidationspvservers` | SPV using a list of servers |
+| `checkpassvalidationservers` | Relies on servers but allows user to choose |
+| `checkfailvalidationcentralized` | Relies on centralized servers |
 
 **Transparency** - How transparent and « zero trust » is the source code?
 
-To get a good score, the wallet must deserve a passing score and be built
-deterministically.
+Use one of the following values for the `transparency` field:
 
-To get a passing score, the wallet must be open-source, under version control
-and releases must be clearly identified (e.g. by tags or commits). The codebase
-and final releases must be public since at least 6 months and previous commits
-must remain unchanged.
+| Value | Meaning |
+|-------|---------|
+| `checkgoodtransparencydeterministic` | Open source and deterministically built |
+| `checkpasstransparencyopensource` | Open source under version control |
+| `checkpasstransparencyopensourcehardware` | Hardware wallet with open-source firmware |
+| `checkpasstransparencyopenspechardware` | Hardware wallet with open specification |
+| `checkfailtransparencyclosedsource` | Closed source |
+| `checkfailtransparencyremote` | Remote code execution |
+| `checkfailtransparencynew` | Open source but released less than 6 months ago |
 
 **Environment** - How secure is the environment of the wallet?
 
-To get a good score, the wallet must run from an environment where no apps can
-be installed.
+Use one of the following values for the `environment` field:
 
-To get a passing score, the wallet must run from an environment that provides
-app isolation (e.g. Android, iOS), or require two-factor authentication for
-spending.
+| Value | Meaning |
+|-------|---------|
+| `checkgoodenvironmenthardware` | Dedicated hardware device |
+| `checkpassenvironmentmobile` | Mobile OS with app isolation |
+| `checkpassenvironmenttwofactor` | Requires two-factor authentication for spending |
+| `checkfailenvironmentdesktop` | Desktop OS (shared environment) |
 
-**Privacy**: Does the wallet protect users' privacy?
+**Privacy** - Does the wallet protect users' privacy?
 
-To get a good score, the wallet must avoid address reuse by using a new change
-address for each transaction, avoid disclosing information to peers or central
-servers and be compatible with Tor.
+Use one of the following values for the `privacy` field:
 
-To get a passing score, the wallet must avoid address reuse by using a new
-change address for each transaction.
+| Value | Meaning |
+|-------|---------|
+| `checkgoodprivacyimproved` | New change address per transaction, no disclosure, Tor compatible |
+| `checkpassprivacybasic` | New change address per transaction |
+| `checkneutralprivacyvariable` | Privacy depends on configuration |
+| `checkfailprivacyweak` | Does not avoid address reuse |
+
+**Fees** - How does the wallet decide what transaction fee to pay?
+
+Use one of the following values for the `fees` field:
+
+| Value | Meaning |
+|-------|---------|
+| `checkgoodfeecontrolfull` | User has full manual control over fees |
+| `checkpassfeecontroldynamic` | Wallet uses dynamic fee estimation |
+| `checkpassfeecontroloverride` | Dynamic fees with user override option |
+| `checkneutralfeecontrolvariable` | Fee control depends on configuration |
+| `checkfailfeecontrolstatic` | Static fee rate with no user control |
+
+### Privacy check (optional)
+
+In addition to the `check` field, a `privacycheck` field can be provided to
+give detailed privacy sub-scores. It must include all three fields below:
+
+| Field | Values |
+|-------|--------|
+| `privacyaddressreuse` | `checkpassprivacyaddressrotation` (new address per transaction), `checkfailprivacyaddressrotation` (reuses addresses) |
+| `privacydisclosure` | `checkpassprivacydisclosurefullnode` (no disclosure), `checkfailprivacydisclosurespv` (discloses to random peers), `checkfailprivacydisclosurecentralized` (discloses to servers), `checkfailprivacydisclosureaccount` (requires account) |
+| `privacynetwork` | `checkpassprivacynetworksupporttorproxy` (supports Tor proxy), `checkfailprivacynetworknosupporttor` (no Tor support) |
 
 ### Schema validation
 
 Wallet entries are validated against the schema in
 `quality-assurance/schemas/wallets.yaml` and you will find a
 description of every available option in that file.
-
-### TODO
-
-+ Review existing instructions
-+ Add instructions for declaring features alongside wallet additions
-+ Update instructions for declaring criteria

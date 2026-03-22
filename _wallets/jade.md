@@ -5,7 +5,7 @@
 id: jade
 title: "Blockstream Jade"
 titleshort: "Jade"
-compat: "hardware"
+compat: [hardware]
 level: 2
 platform:
   - hardware:
@@ -16,7 +16,7 @@ platform:
         link: "https://blockstream.com/jade/"
         source: "https://github.com/Blockstream/Jade"
         screenshot: "jade.png"
-        features: "bech32 hardware_wallet legacy_addresses multisig segwit"
+        features: [bech32, hardware_wallet, legacy_addresses, multisig, segwit]
         check:
           control: "checkgoodcontrolfull"
           validation: "checkneutralvalidationvariable"

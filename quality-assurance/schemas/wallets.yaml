@@ -30,11 +30,23 @@ properties:
     minLength: 1
     maxLength: 20
 
-  ## TODO: change this into an array so we can practically test values
   compat:
     description: A complete list of platforms supported by the wallet
-    type: string
-    minLength: 1
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items:
+      type: string
+      enum:
+        - desktop
+        - mobile
+        - hardware
+        - web
+        - windows
+        - mac
+        - linux
+        - android
+        - ios
 
   user:
     description: Denotes whether or not the wallet is designed for new users
@@ -42,8 +54,6 @@ properties:
     enum:
       - beginner
 
-  ## TODO: we should probably use names here and translate to
-  ##       numbers (if required) in the template
   level:
     description: |
       The wallet's overall security level.
@@ -92,8 +102,7 @@ properties:
               - screenshot
               - features
               - check
-              ## TODO: Not currently required, but we should aim for making it required #
-              # - source
+              - source
             additionalProperties:
               - privacycheck
             properties:
@@ -128,10 +137,22 @@ properties:
               screenshot: &screenshot
                 description: File name for screenshot within the /img/screenshots/ directory
                 type: string
-              ## TODO: change this into an array so we can practically test values
               features:
-                type: string
-                minLength: 1
+                type: array
+                minItems: 1
+                uniqueItems: true
+                items:
+                  type: string
+                  enum:
+                    - 2fa
+                    - bech32
+                    - full_node
+                    - hardware_wallet
+                    - legacy_addresses
+                    - lightning
+                    - mixing_shuffling
+                    - multisig
+                    - segwit
               check: &check
                 description: The wallet's features (or lack thereof)
                 type: object
@@ -141,8 +162,7 @@ properties:
                   - transparency
                   - environment
                   - privacy
-                  ## TODO: make required when web wallets moved
-                  # - fees
+                  - fees
                 additionalProperties: false
                 properties:
                   control:
