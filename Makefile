@@ -57,6 +57,8 @@ pre-build-tests-fast: check-for-non-ascii-urls check-for-wrong-filename-assignme
     check-for-too-many-wallets-on-one-platform \
     check-validate-yaml \
     check-wallet-description-length \
+    check-ruby-tests \
+    check-js-tests \
 
 ## Post-build tests which, aggregated together, take less than 10 seconds to run on a typical PC
 post-build-tests-fast: check-for-build-errors ensure-each-svg-has-a-png check-for-liquid-errors \
@@ -296,3 +298,14 @@ check-validate-yaml:
 check-wallet-description-length:
 ## Ensure wallet descriptions are 320 characters or less
 	$S sed -n '/^  choose-your-wallet:/,/^  [-a-z]\+:/{/wallet.*:.\{320\}/p} ' _translations/en.yml | eval $(ERROR_ON_OUTPUT)
+
+check-ruby-tests:
+## Run Ruby unit tests covering plugin helpers and validation logic
+	$S bundle exec ruby test/ruby/test_releases.rb
+	$S bundle exec ruby test/ruby/test_alerts.rb
+	$S bundle exec ruby test/ruby/test_contributors.rb
+	$S bundle exec ruby test/ruby/test_schema_validator.rb
+
+check-js-tests:
+## Run JavaScript unit tests covering utility functions in main.js and walletSelector.js
+	$S cd test/js && npm install --silent && npm test

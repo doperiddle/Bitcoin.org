@@ -16,3 +16,6 @@ _cache
 # To prevent accidental push of translations from
 # Transifex.
 .tx/translations/
+
+# JavaScript test runner dependencies
+test/js/node_modules/
